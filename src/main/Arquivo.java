@@ -39,7 +39,7 @@ public class Arquivo {
     
     /**
      * Cria o diretório e o arquivo pedido.
-     * @param local_completo  C:\nomeArquivo.txt 
+     * @param fileOriginial Variavel file do arquivo
      * @param texto "ABCDE"
      * @return = Verdadeiro ou falso dependendo se conseguiu criar o arquivo
      */
