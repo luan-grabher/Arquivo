@@ -1,7 +1,7 @@
 
 package Testes;
 
-import main.Arquivo;
+import fileManager.FileManager;
 
 
 public class test {
@@ -10,7 +10,7 @@ public class test {
     public static void main(String[] args) {
         String lugar = "//zac/Robos/Retornos de Tarefas/15716.html";
         
-        String texto = Arquivo.ler(lugar);
+        String texto = FileManager.getText(lugar);
         
         System.out.print(texto);
     }

@@ -1,4 +1,4 @@
-package main;
+package fileManager;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,10 +9,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 
-public class Arquivo {
+public class FileManager {
     
-    public static String ler(String localCompletoArquivo){
-        return ler(new File(localCompletoArquivo));
+    public static String getText(String completePath){
+        return getText(new File(completePath));
     }
     
     /**
@@ -20,15 +20,15 @@ public class Arquivo {
      * @param file "C:\Arquivo.txt"
      * @return = Retorna o texto dentro do arquivo.
      */
-    public static String ler(File file){
+    public static String getText(File file){
         try {
-            String texto;
-            File arquivo = file.getAbsoluteFile();
-            Scanner scan = new Scanner(arquivo, "latin1");
-            texto = scan.useDelimiter("\\A").next();
+            String text;
+            file = file.getAbsoluteFile();
+            Scanner scan = new Scanner(file, "latin1");
+            text = scan.useDelimiter("\\A").next();
             scan.close();
             
-            return texto;
+            return text;
             
         } catch (Exception e) {
             //e.printStackTrace();
@@ -39,19 +39,19 @@ public class Arquivo {
     
     /**
      * Cria o diretório e o arquivo pedido.
-     * @param fileOriginial Variavel file do arquivo
-     * @param texto "ABCDE"
+     * @param file Variavel file do arquivo
+     * @param text "ABCDE"
      * @return = Verdadeiro ou falso dependendo se conseguiu criar o arquivo
      */
-    public static boolean salvar(File fileOriginial, String texto) {
+    public static boolean save(File file, String text) {
         try{
             Writer writer;
             BufferedWriter out = null;
             
-            File file = fileOriginial.getAbsoluteFile();
+            file = file.getAbsoluteFile();
             
             writer = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.ISO_8859_1);
-            writer.append(texto);
+            writer.append(text);
             writer.flush();
             writer.close();
             return true;
@@ -63,27 +63,28 @@ public class Arquivo {
     }
     /**
      * Cria o diretório e o arquivo pedido.
-     * @param localSalvar C:\pasta\subpasta
-     * @param nomeArquivo nomeArquivo.txt 
-     * @param texto "ABCDE"
+     * @param folder C:\pasta\subpasta
+     * @param fileName nomeArquivo.txt 
+     * @param text "ABCDE"
      * @return = Verdadeiro ou falso dependendo se conseguiu criar o arquivo
      */
-    public static boolean salvar(String localSalvar,String nomeArquivo, String texto) {
+    public static boolean save(File folder,String fileName, String text) {
         try{
             
-            criarDiretorios(localSalvar);
-            return salvar(localSalvar + "\\" + nomeArquivo, texto);            
+            createFolder(folder);
+            return save(folder + "\\" + fileName, text);            
         }catch(Exception e){
             System.out.println("Ocorreu um erro na classe Arquivo: " + e);
             e.printStackTrace();
             return false;
         }
     }
-    public static boolean salvar(String local_completo, String texto){
-        return salvar(new File(local_completo), texto);
+    public static boolean save(String completePath, String text){
+        return FileManager.save(new File(completePath), text);
     }
-    public static boolean criarDiretorios(String nomeDiretorios){
-        File dir = new File(nomeDiretorios).getAbsoluteFile();
+    public static boolean createFolder(File folder){
+        
+        File dir = folder.getAbsoluteFile();
         Boolean booleano = false;
         try
         {
@@ -99,7 +100,7 @@ public class Arquivo {
                 
         } catch (Exception e)
         {
-            System.out.println("Erro ao criar diretório: " + nomeDiretorios + "\n Erro: " +  e);
+            System.out.println("Erro ao criar diretório: " + folder + "\n Erro: " +  e);
             return booleano;
         }
         return booleano;
@@ -107,10 +108,10 @@ public class Arquivo {
     
     /**
      * Retorna se o arquivo está aberto ou fechado.
-     * @param arquivo Objeto do tipo File
+     * @param text Objeto do tipo File
      * @return Verdadeiro se o arquivo estiver aberto ou Falso caso o arquivo esteja fechado
      */
-    public static boolean aberto(File arquivo){
-        return !arquivo.renameTo(arquivo);
+    public static boolean isOpen(File text){
+        return !text.renameTo(text);
     }
 }
