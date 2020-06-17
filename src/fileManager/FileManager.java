@@ -31,7 +31,7 @@ public class FileManager {
             return text;
             
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             //return "ERRO NA LEITURA: " + e;
             return "";
         }
