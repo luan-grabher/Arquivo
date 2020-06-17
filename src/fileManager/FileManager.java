@@ -22,6 +22,10 @@ public class FileManager {
      */
     public static String getText(File file){
         try {
+            if(!file.exists()){
+                throw new Exception("O arquivo '" + file.getAbsolutePath() + "' não existe!");
+            }
+            
             String text;
             file = file.getAbsoluteFile();
             Scanner scan = new Scanner(file, "latin1");
