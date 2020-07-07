@@ -110,6 +110,15 @@ public class FileManager {
         return booleano;
     }
     
+    public static File getFile(String path){
+        File file = new File(path);
+        if(file.exists()){
+            return file;
+        }else{
+            throw new Error("O arquivo/pasta '" + path + "' não foi encontrado!");
+        }
+    }
+    
     /**
      * Retorna se o arquivo está aberto ou fechado.
      * @param text Objeto do tipo File
