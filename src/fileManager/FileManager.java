@@ -110,6 +110,11 @@ public class FileManager {
         return booleano;
     }
     
+    /**
+     * Retorna o objeto de arquivo se o arquivo existir, se não, mostra um erro.
+     * @param path local da pasta ou arquivo
+     * @return o objeto de arquivo se o arquivo existir, se não, mostra um erro
+     */
     public static File getFile(String path){
         File file = new File(path);
         if(file.exists()){
