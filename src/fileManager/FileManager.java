@@ -65,6 +65,7 @@ public class FileManager {
             return false;
         }
     }
+    
     /**
      * Cria o diretório e o arquivo pedido.
      * @param folder C:\pasta\subpasta
