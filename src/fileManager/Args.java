@@ -3,7 +3,7 @@ package fileManager;
 public class Args {
 
     /**
-     * Pega posição dentro do array do termo procurado
+     * Pega posição dentro do array do termo procurado ignorando Ucase, converte tudo para lowercase para comparar
      *
      * @param args Array de String recebido nos argumentos
      * @param arg Termo procurado
