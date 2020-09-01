@@ -34,7 +34,7 @@ public class Args {
         int index = indexOf(args, arg);
 
         //Se encontrar  argumento e a próxima posição existir e não começar com -
-        if (index > -1 && index + 1 < args.length && args[index + 1].startsWith("-")) {
+        if (index > -1 && index + 1 < args.length && !args[index + 1].startsWith("-")) {
             return args[index + 1];
         }
 
