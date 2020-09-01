@@ -9,7 +9,7 @@ public class Args {
      * @param arg Termo procurado
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
-    private static Integer indexOf(String[] args, String arg) {
+    public static Integer indexOf(String[] args, String arg) {
         for (int i = 0; i < args.length; i++) {
             if (args[i].toLowerCase().equals(arg.toLowerCase())) {
                 return i;
