@@ -3,7 +3,8 @@ package fileManager;
 public class Args {
 
     /**
-     * Pega posição dentro do array do termo procurado ignorando Ucase, converte tudo para lowercase para comparar
+     * Pega posição dentro do array do termo procurado ignorando Ucase, converte
+     * tudo para lowercase para comparar
      *
      * @param args Array de String recebido nos argumentos
      * @param arg Termo procurado
@@ -12,6 +13,23 @@ public class Args {
     public static Integer indexOf(String[] args, String arg) {
         for (int i = 0; i < args.length; i++) {
             if (args[i].toLowerCase().equals(arg.toLowerCase())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Pega posição dentro do array do filtro de string procurado ignorando Ucase, converte
+     * os argumentos para lowercase para comparar, o filtro deve estar em lower case
+     *
+     * @param args Array de String recebido nos argumentos
+     * @param filter Filtro procurado
+     * @return O index do termo procurado no array, se não encontrar retorna -1
+     */
+    public static Integer indexOf(String[] args, StringFilter filter) {
+        for (int i = 0; i < args.length; i++) {
+            if (filter.filterOfString(args[i].toLowerCase())) {
                 return i;
             }
         }
