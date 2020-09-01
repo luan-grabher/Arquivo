@@ -9,7 +9,7 @@ public class Args {
      * @param arg Termo procurado
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
-    private Integer indexOf(String[] args, String arg) {
+    private static Integer indexOf(String[] args, String arg) {
         for (int i = 0; i < args.length; i++) {
             if (args[i].toLowerCase().equals(arg.toLowerCase())) {
                 return i;
@@ -26,7 +26,7 @@ public class Args {
      * @param arg Argumento procurado sem o "-"
      * @return O valor do argumento procurado
      */
-    private String get(String[] args, String arg) {
+    public static String get(String[] args, String arg) {
         //Converte o argumento pesquisado para a pesquisa
         arg = "-" + arg;
 
