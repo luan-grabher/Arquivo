@@ -3,13 +3,49 @@ package fileManager;
 public class Args {
 
     /**
-     * Retorna a posição do regex, argumento ou filtro dentro de um array de Strings.
+     * Retorna a posição do regex dentro de um array de Strings.
+     *
      * @param array Array com strings, o index retornado será o que está aqui.
-     * @param regex Regex para filtrar, sempre irá ignorar os cases e sempre irá procurar aquele regex está no meio do texto, não verifica se o texto é exatamente o regex
-     * @param arg Argumento procurado, o texto deverá ser igual a ele, igora os cases
-     * @param filter Filtro com possui e não possui, os filtros devem estar em lower case
+     * @param regex Regex para filtrar, sempre irá ignorar os cases e sempre irá
+     * procurar aquele regex está no meio do texto, não verifica se o texto é
+     * exatamente o regex
      * @param skip Quantos encontros irá pular até poder fazer o retorno
-     * @return Retorna a posição do regex, argumento ou filtro dentro de um array de Strings
+     * @return Retorna a posição do regex, argumento ou filtro dentro de um
+     * array de Strings
+     */
+    public static Integer indexOf(String regex, String[] array, int skip) {
+        return indexOf(array, regex, null, null, skip);
+    }
+
+    /**
+     * Retorna a posição do regex dentro de um array de Strings.
+     *
+     * @param array Array com strings, o index retornado será o que está aqui.
+     * @param regex Regex para filtrar, sempre irá ignorar os cases e sempre irá
+     * procurar aquele regex está no meio do texto, não verifica se o texto é
+     * exatamente o regex
+     * @return Retorna a posição do regex, argumento ou filtro dentro de um
+     * array de Strings
+     */
+    public static Integer indexOf(String regex, String[] array) {
+        return indexOf(array, regex, null, null, 0);
+    }
+
+    /**
+     * Retorna a posição do regex, argumento ou filtro dentro de um array de
+     * Strings.
+     *
+     * @param array Array com strings, o index retornado será o que está aqui.
+     * @param regex Regex para filtrar, sempre irá ignorar os cases e sempre irá
+     * procurar aquele regex está no meio do texto, não verifica se o texto é
+     * exatamente o regex
+     * @param arg Argumento procurado, o texto deverá ser igual a ele, igora os
+     * cases
+     * @param filter Filtro com possui e não possui, os filtros devem estar em
+     * lower case
+     * @param skip Quantos encontros irá pular até poder fazer o retorno
+     * @return Retorna a posição do regex, argumento ou filtro dentro de um
+     * array de Strings
      */
     public static Integer indexOf(String[] array, String regex, String arg, StringFilter filter, int skip) {
         int searchs = 0;
@@ -36,7 +72,7 @@ public class Args {
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
     public static Integer indexOf(String[] args, String arg) {
-        return indexOf(args,null, arg, null, 0);
+        return indexOf(args, null, arg, null, 0);
     }
 
     /**
@@ -63,7 +99,7 @@ public class Args {
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
     public static Integer indexOf(String[] args, StringFilter filter, int skip) {
-       return indexOf(args, null, null, filter, skip);
+        return indexOf(args, null, null, filter, skip);
     }
 
     /**
