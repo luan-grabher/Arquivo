@@ -3,6 +3,31 @@ package fileManager;
 public class Args {
 
     /**
+     * Retorna a posição do regex, argumento ou filtro dentro de um array de Strings.
+     * @param array Array com strings, o index retornado será o que está aqui.
+     * @param regex Regex para filtrar, sempre irá ignorar os cases e sempre irá procurar aquele regex está no meio do texto, não verifica se o texto é exatamente o regex
+     * @param arg Argumento procurado, o texto deverá ser igual a ele, igora os cases
+     * @param filter Filtro com possui e não possui, os filtros devem estar em lower case
+     * @param skip Quantos encontros irá pular até poder fazer o retorno
+     * @return Retorna a posição do regex, argumento ou filtro dentro de um array de Strings
+     */
+    public static Integer indexOf(String[] array, String regex, String arg, StringFilter filter, int skip) {
+        int searchs = 0;
+        for (int i = 0; i < array.length; i++) {
+            if ((regex != null && array[i].matches("(?i).*?" + regex + ".*?"))
+                    | (arg != null && array[i].toLowerCase().equals(arg.toLowerCase()))
+                    | (filter != null && filter.filterOfString(array[i].toLowerCase()))) {
+                searchs++;
+                if (searchs > skip) {
+                    return i;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    /**
      * Pega posição dentro do array do termo procurado ignorando Ucase, converte
      * tudo para lowercase para comparar
      *
@@ -11,9 +36,8 @@ public class Args {
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
     public static Integer indexOf(String[] args, String arg) {
-        return indexOf(args, arg, 0);
+        return indexOf(args,null, arg, null, 0);
     }
-
 
     /**
      * Pega posição dentro do array do termo procurado ignorando Ucase, converte
@@ -25,17 +49,7 @@ public class Args {
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
     public static Integer indexOf(String[] args, String arg, int skip) {
-        int searchs = 0;
-        
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].toLowerCase().equals(arg.toLowerCase())) {
-                searchs++;
-                if(searchs > skip){
-                    return i;
-                }               
-            }
-        }
-        return -1;
+        return indexOf(args, null, arg, null, skip);
     }
 
     /**
@@ -49,16 +63,7 @@ public class Args {
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
     public static Integer indexOf(String[] args, StringFilter filter, int skip) {
-        int searchs = 0;
-        for (int i = 0; i < args.length; i++) {
-            if (filter.filterOfString(args[i].toLowerCase())) {
-                searchs++;
-                if (searchs > skip) {
-                    return i;
-                }
-            }
-        }
-        return -1;
+       return indexOf(args, null, null, filter, skip);
     }
 
     /**
@@ -71,7 +76,7 @@ public class Args {
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
     public static Integer indexOf(String[] args, StringFilter filter) {
-        return indexOf(args, filter, 0);
+        return indexOf(args, null, null, filter, 0);
     }
 
     /**
