@@ -11,29 +11,67 @@ public class Args {
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
     public static Integer indexOf(String[] args, String arg) {
+        return indexOf(args, arg, 0);
+    }
+
+
+    /**
+     * Pega posição dentro do array do termo procurado ignorando Ucase, converte
+     * tudo para lowercase para comparar
+     *
+     * @param args Array de String recebido nos argumentos
+     * @param arg Termo procurado
+     * @param skip Número de vezez que irá pular
+     * @return O index do termo procurado no array, se não encontrar retorna -1
+     */
+    public static Integer indexOf(String[] args, String arg, int skip) {
+        int searchs = 0;
+        
         for (int i = 0; i < args.length; i++) {
             if (args[i].toLowerCase().equals(arg.toLowerCase())) {
-                return i;
+                searchs++;
+                if(searchs > skip){
+                    return i;
+                }               
             }
         }
         return -1;
     }
 
     /**
-     * Pega posição dentro do array do filtro de string procurado ignorando Ucase, converte
-     * os argumentos para lowercase para comparar, o filtro deve estar em lower case
+     * Pega posição dentro do array do filtro de string procurado ignorando
+     * Ucase, converte os argumentos para lowercase para comparar, o filtro deve
+     * estar em lower case
+     *
+     * @param args Array de String recebido nos argumentos
+     * @param filter Filtro procurado
+     * @param skip Número de vezez que irá pular
+     * @return O index do termo procurado no array, se não encontrar retorna -1
+     */
+    public static Integer indexOf(String[] args, StringFilter filter, int skip) {
+        int searchs = 0;
+        for (int i = 0; i < args.length; i++) {
+            if (filter.filterOfString(args[i].toLowerCase())) {
+                searchs++;
+                if (searchs > skip) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Pega posição dentro do array do filtro de string procurado ignorando
+     * Ucase, converte os argumentos para lowercase para comparar, o filtro deve
+     * estar em lower case
      *
      * @param args Array de String recebido nos argumentos
      * @param filter Filtro procurado
      * @return O index do termo procurado no array, se não encontrar retorna -1
      */
     public static Integer indexOf(String[] args, StringFilter filter) {
-        for (int i = 0; i < args.length; i++) {
-            if (filter.filterOfString(args[i].toLowerCase())) {
-                return i;
-            }
-        }
-        return -1;
+        return indexOf(args, filter, 0);
     }
 
     /**
