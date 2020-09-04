@@ -2,57 +2,74 @@ package fileManager;
 
 public class Args {
 
+    public static final int INDEX_OF_SEARCH_TYPE_REGEX_BETWEEN = 0;
+    public static final int INDEX_OF_SEARCH_TYPE_REGEX_EQUALS = 1;
+    public static final int INDEX_OF_SEARCH_TYPE_EQUALS = 2;
+    public static final int INDEX_OF_SEARCH_TYPE_EQUALS_IGNORE_CASE = 3;
+    public static final int INDEX_OF_SEARCH_TYPE_STRINGFILTER = 4;
+
     /**
-     * Retorna a posição do regex dentro de um array de Strings.
+     * Retorna a posição da procura no array de strings informado
+     *
+     * Se o tipo for REGEX_BETWEEN, vai verificar se a procura está no meio de
+     * algum vetor, e irá ignorar os cases.
+     *
+     * Se o tipo for REGEX_EQUALS, vai verificar se a procura é um match exato
+     * de algum vetor.
+     *
+     * Se o tipo for EQUALS, vai procurar um vetor exatamente igual a procura.
+     * Diferencia minusculas de maiusculas.
+     *
+     * Se o tipo for EQUALS_IGNORE_CASE, você já imagina né?
+     *
+     * Se o tipo for STRINGFILTER, irá criar uma classe StringFilter com a
+     * String e verificar se é filtro de algum vetor em lowercase.
      *
      * @param array Array com strings, o index retornado será o que está aqui.
-     * @param regex Regex para filtrar, sempre irá ignorar os cases e sempre irá
-     * procurar aquele regex está no meio do texto, não verifica se o texto é
-     * exatamente o regex
-     * @param skip Quantos encontros irá pular até poder fazer o retorno
-     * @return Retorna a posição do regex, argumento ou filtro dentro de um
-     * array de Strings
+     * @param searchType Tipo da procura, na classe Args, existe variaveis de
+     * ajuda.
+     * @param search A procura em si, em String
+     * @return Retorna a posição da procura dentro do array de Strings
+     *
      */
-    public static Integer indexOf(String regex, String[] array, int skip) {
-        return indexOf(array, regex, null, null, skip);
+    public static Integer indexOf(String[] array, int searchType, String search) {
+        return indexOf(array, searchType, search, 0);
     }
 
     /**
-     * Retorna a posição do regex dentro de um array de Strings.
+     * Retorna a posição da procura no array de strings informado
+     *
+     * Se o tipo for REGEX_BETWEEN, vai verificar se a procura está no meio de
+     * algum vetor, e irá ignorar os cases.
+     *
+     * Se o tipo for REGEX_EQUALS, vai verificar se a procura é um match exato
+     * de algum vetor.
+     *
+     * Se o tipo for EQUALS, vai procurar um vetor exatamente igual a procura.
+     * Diferencia minusculas de maiusculas.
+     *
+     * Se o tipo for EQUALS_IGNORE_CASE, você já imagina né?
+     *
+     * Se o tipo for STRINGFILTER, irá criar uma classe StringFilter com a
+     * String e verificar se é filtro de algum vetor em lowercase.
      *
      * @param array Array com strings, o index retornado será o que está aqui.
-     * @param regex Regex para filtrar, sempre irá ignorar os cases e sempre irá
-     * procurar aquele regex está no meio do texto, não verifica se o texto é
-     * exatamente o regex
-     * @return Retorna a posição do regex, argumento ou filtro dentro de um
-     * array de Strings
-     */
-    public static Integer indexOf(String regex, String[] array) {
-        return indexOf(array, regex, null, null, 0);
-    }
-
-    /**
-     * Retorna a posição do regex, argumento ou filtro dentro de um array de
-     * Strings.
+     * @param searchType Tipo da procura, na classe Args, existe variaveis de
+     * ajuda.
+     * @param search A procura em si, em String
+     * @param skip Quantos encontros irá pular até poder fazer o retorno. Defina
+     * 0 para não pular nenhum.
+     * @return Retorna a posição da procura dentro do array de Strings
      *
-     * @param array Array com strings, o index retornado será o que está aqui.
-     * @param regex Regex para filtrar, sempre irá ignorar os cases e sempre irá
-     * procurar aquele regex está no meio do texto, não verifica se o texto é
-     * exatamente o regex
-     * @param arg Argumento procurado, o texto deverá ser igual a ele, igora os
-     * cases
-     * @param filter Filtro com possui e não possui, os filtros devem estar em
-     * lower case
-     * @param skip Quantos encontros irá pular até poder fazer o retorno
-     * @return Retorna a posição do regex, argumento ou filtro dentro de um
-     * array de Strings
      */
-    public static Integer indexOf(String[] array, String regex, String arg, StringFilter filter, int skip) {
+    public static Integer indexOf(String[] array, int searchType, String search, int skip) {
         int searchs = 0;
         for (int i = 0; i < array.length; i++) {
-            if ((regex != null && array[i].matches("(?i).*?" + regex + ".*?"))
-                    | (arg != null && array[i].toLowerCase().equals(arg.toLowerCase()))
-                    | (filter != null && filter.filterOfString(array[i].toLowerCase()))) {
+            if ((searchType == INDEX_OF_SEARCH_TYPE_REGEX_BETWEEN && array[i].matches("(?i).*?" + search + ".*?"))
+                    || (searchType == INDEX_OF_SEARCH_TYPE_REGEX_EQUALS && array[i].matches(search))
+                    || (searchType == INDEX_OF_SEARCH_TYPE_EQUALS && array[i].equals(search))
+                    || (searchType == INDEX_OF_SEARCH_TYPE_EQUALS_IGNORE_CASE && array[i].toLowerCase().equals(search.toLowerCase()))
+                    || (searchType == INDEX_OF_SEARCH_TYPE_STRINGFILTER && (new StringFilter(search)).filterOfString(array[i].toLowerCase()))) {
                 searchs++;
                 if (searchs > skip) {
                     return i;
@@ -61,58 +78,6 @@ public class Args {
         }
 
         return -1;
-    }
-
-    /**
-     * Pega posição dentro do array do termo procurado ignorando Ucase, converte
-     * tudo para lowercase para comparar
-     *
-     * @param args Array de String recebido nos argumentos
-     * @param arg Termo procurado
-     * @return O index do termo procurado no array, se não encontrar retorna -1
-     */
-    public static Integer indexOf(String[] args, String arg) {
-        return indexOf(args, null, arg, null, 0);
-    }
-
-    /**
-     * Pega posição dentro do array do termo procurado ignorando Ucase, converte
-     * tudo para lowercase para comparar
-     *
-     * @param args Array de String recebido nos argumentos
-     * @param arg Termo procurado
-     * @param skip Número de vezez que irá pular
-     * @return O index do termo procurado no array, se não encontrar retorna -1
-     */
-    public static Integer indexOf(String[] args, String arg, int skip) {
-        return indexOf(args, null, arg, null, skip);
-    }
-
-    /**
-     * Pega posição dentro do array do filtro de string procurado ignorando
-     * Ucase, converte os argumentos para lowercase para comparar, o filtro deve
-     * estar em lower case
-     *
-     * @param args Array de String recebido nos argumentos
-     * @param filter Filtro procurado
-     * @param skip Número de vezez que irá pular
-     * @return O index do termo procurado no array, se não encontrar retorna -1
-     */
-    public static Integer indexOf(String[] args, StringFilter filter, int skip) {
-        return indexOf(args, null, null, filter, skip);
-    }
-
-    /**
-     * Pega posição dentro do array do filtro de string procurado ignorando
-     * Ucase, converte os argumentos para lowercase para comparar, o filtro deve
-     * estar em lower case
-     *
-     * @param args Array de String recebido nos argumentos
-     * @param filter Filtro procurado
-     * @return O index do termo procurado no array, se não encontrar retorna -1
-     */
-    public static Integer indexOf(String[] args, StringFilter filter) {
-        return indexOf(args, null, null, filter, 0);
     }
 
     /**
@@ -128,7 +93,7 @@ public class Args {
         arg = "-" + arg;
 
         //Pega a posição do argumento
-        int index = indexOf(args, arg);
+        int index = indexOf(args, INDEX_OF_SEARCH_TYPE_EQUALS_IGNORE_CASE, arg, 0);
 
         //Se encontrar  argumento e a próxima posição existir e não começar com -
         if (index > -1 && index + 1 < args.length && !args[index + 1].startsWith("-")) {

@@ -50,6 +50,14 @@ public class StringFilter {
         putStringListOnMap(hasNotList, hasNot);
     }
 
+    public Map<String, String> getHas() {
+        return has;
+    }
+
+    public Map<String, String> getHasNot() {
+        return hasNot;
+    }        
+
     public void setHas(Map<String, String> has) {
         this.has = has;
     }
