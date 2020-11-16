@@ -11,6 +11,11 @@ import java.util.Scanner;
 
 public class FileManager {
     
+    /**
+     * Lê um arquivo de texto.
+     * @param file "C:\Arquivo.txt"
+     * @return = Retorna o texto dentro do arquivo.
+     */
     public static String getText(String completePath){
         return getText(new File(completePath));
     }

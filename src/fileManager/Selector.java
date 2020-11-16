@@ -113,7 +113,7 @@ public class Selector {
 
             //Se tiver o tipo de arquivo, seleciona arquivos
             if (!typeName.equals("") && !type.equals("")) {
-                fileChooser.setFileFilter(new FileNameExtensionFilter(typeName, type));
+                fileChooser.setFileFilter(new FileNameExtensionFilter(typeName, type.replaceAll("\\.", "")));
                 fileChooser.setAcceptAllFileFilterUsed(false);
             } else {
                 //Se não, seleciona pasta
