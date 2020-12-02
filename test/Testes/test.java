@@ -2,17 +2,17 @@
 package Testes;
 
 import fileManager.FileManager;
+import fileManager.StringFilter;
 
 
 public class test {
 
 
     public static void main(String[] args) {
-        String lugar = "//zac/Robos/Retornos de Tarefas/15716.html";
+        String str = "CAIXA FIXO OUT-2020 -  francine.xlsx";
+        StringFilter filtro = new StringFilter("CAIXA;FIXO;.xlsx");
         
-        String texto = FileManager.getText(lugar);
-        
-        System.out.print(texto);
+        System.out.println(filtro.filterOfString(str));
     }
     
 }
