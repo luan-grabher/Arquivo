@@ -93,9 +93,11 @@ public class StringFilter {
      * @param stringList Lista de termos
      */
     private void putStringListOnMap(String stringList, Map<String, String> map) {
-        String[] strings = stringList.split(";");
-        for (String string : strings) {
-            map.put(string, string);
+        if(stringList != null){
+            String[] strings = stringList.split(";");
+            for (String string : strings) {
+                map.put(string, string);
+            }
         }
     }
 
