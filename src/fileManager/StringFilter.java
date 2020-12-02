@@ -60,10 +60,12 @@ public class StringFilter {
 
     public void setHas(Map<String, String> has) {
         this.has = has;
+        has.remove("");
     }
 
     public void setHasNot(Map<String, String> hasNot) {
         this.hasNot = hasNot;
+        hasNot.remove("");
     }
 
     /**
@@ -98,6 +100,8 @@ public class StringFilter {
             for (String string : strings) {
                 map.put(string, string);
             }
+            
+            map.remove("");
         }
     }
 
@@ -109,7 +113,9 @@ public class StringFilter {
      */
     public boolean filterOfString(String string) {
         //É comparado em lower case porque o mapa no put define as strings como lowercase na key
-
+        has.remove("");
+        hasNot.remove("");
+        
         //Se a string não tiver algum dos termos que deve possuir, retorna falso
         if (!has.entrySet().stream().noneMatch((entry) -> (!string.toLowerCase().contains(entry.getKey())))) {
             return false;
