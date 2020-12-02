@@ -106,13 +106,14 @@ public class StringFilter {
      * @return True se o filtro é um filtro válido da string informada, false se não 
      */
     public boolean filterOfString(String string) {
+        //É comparado em lower case porque o mapa no put define as strings como lowercase na key
 
         //Se a string não tiver algum dos termos que deve possuir, retorna falso
-        if (!has.entrySet().stream().noneMatch((entry) -> (!string.contains(entry.getKey())))) {
+        if (!has.entrySet().stream().noneMatch((entry) -> (!string.toLowerCase().contains(entry.getKey())))) {
             return false;
         }
         //Se a string não tiver nenhum termo que NAO deve possui, retorna true, se não false
-        return hasNot.entrySet().stream().noneMatch((entry) -> (string.contains(entry.getKey())));
+        return hasNot.entrySet().stream().noneMatch((entry) -> (string.toLowerCase().contains(entry.getKey())));
     }
 
     /**
