@@ -86,7 +86,7 @@ public class Args {
      *
      * @param args Array de String recebido nos argumentos
      * @param arg Argumento procurado sem o "-"
-     * @return O valor do argumento procurado
+     * @return O valor do argumento procurado ou null se não encontrar
      */
     public static String get(String[] args, String arg) {
         //Converte o argumento pesquisado para a pesquisa
