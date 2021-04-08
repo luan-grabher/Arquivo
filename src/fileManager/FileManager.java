@@ -7,9 +7,30 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 
 public class FileManager {
+    
+    /**
+     * Solicita arquivo CSV para o usuário e diz que o arquivo não é valido caso
+     * não exista ou o usuário não escolha.
+     *
+     * @param fileName Nome do arquivo sem a extensão
+     * @param fileType Extensão do arquivo sem o Ponto
+     * @return O arquivo escolhido
+     * @throws java.lang.Exception Causa um erro dizendo que o arquivo nao é
+     * valido
+     */
+    public static File getFileFromUser(String fileName, String fileType) throws Exception {
+        JOptionPane.showMessageDialog(null, "Escolha o arquivo " + fileName + ":");
+        File file = Selector.selectFile("", fileName + " - ." + fileType, "." + fileType);
+        if (file == null || Selector.verifyFile(file.getPath(), true, "." + fileType)) {
+            return file;
+        } else {
+            throw new Exception("O arquivo " + fileName + " não é válido");
+        }
+    }
     
     /**
      * Lê um arquivo de texto.
