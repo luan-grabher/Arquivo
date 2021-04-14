@@ -131,6 +131,20 @@ public class Selector {
         }
     }
 
+        /**
+     * Retorna o File de um filtro em uma pasta
+     *
+     * @param folder File do local onde está o arquivo
+     * @param filterStr Argumentos separados por ; que devem estar presentes no nome
+     * do arquivo. Inclua a extensão. e separe por # os argumentos que não devem estar
+     * @return O primeiro arquivo que estar no filtro de possui e não possui no
+     * nome. Caso não encontre, retorna null.
+     */
+    public static File getFileOnFolder(File folder, String filterStr) {
+        return getFileOnFolder(folder, new StringFilter(filterStr));
+    }
+    
+    
     /**
      * Retorna o File de um filtro em uma pasta
      *
@@ -143,12 +157,21 @@ public class Selector {
      * nome. Caso não encontre, retorna null.
      */
     public static File getFileOnFolder(File folder, String has, String hasNot) {
+        return getFileOnFolder(folder, new StringFilter(has, hasNot));
+    }
+    
+    /**
+     * Retorna o File de um filtro em uma pasta
+     *
+     * @param folder File do local onde está o arquivo
+     * @param filtro Filtro com argumentos que devem e não devem ter no nome do arquivo. Inclua a extensaão tambem.
+     * @return O primeiro arquivo que estar no filtro de possui e não possui no
+     * nome. Caso não encontre, retorna null.
+     */
+    public static File getFileOnFolder(File folder, StringFilter filtro) {
         try {
             //Verifica se a pasta em que procura existe
             if (verifyFile(folder.getAbsolutePath(), false, "")) {
-                //Instancia filtro de string
-                StringFilter filtro = new StringFilter(has, hasNot);
-
                 //Percorre todos arquivo da pasta
                 File[] files = folder.listFiles();
                 for (File file : files) {
