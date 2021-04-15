@@ -56,7 +56,7 @@ public class StringFilter {
 
     public Map<String, String> getHasNot() {
         return hasNot;
-    }        
+    }
 
     public void setHas(Map<String, String> has) {
         this.has = has;
@@ -95,12 +95,12 @@ public class StringFilter {
      * @param stringList Lista de termos
      */
     private void putStringListOnMap(String stringList, Map<String, String> map) {
-        if(stringList != null){
+        if (stringList != null) {
             String[] strings = stringList.split(";");
             for (String string : strings) {
                 map.put(string, string);
             }
-            
+
             map.remove("");
         }
     }
@@ -109,13 +109,14 @@ public class StringFilter {
      * Verifica se o filtro é um filtro válido da string informada
      *
      * @param string String que deve estar adequada ao filtro
-     * @return True se o filtro é um filtro válido da string informada, false se não 
+     * @return True se o filtro é um filtro válido da string informada, false se
+     * não
      */
     public boolean filterOfString(String string) {
         //É comparado em lower case porque o mapa no put define as strings como lowercase na key
         has.remove("");
         hasNot.remove("");
-        
+
         //Se a string não tiver algum dos termos que deve possuir, retorna falso
         if (!has.entrySet().stream().noneMatch((entry) -> (!string.toLowerCase().contains(entry.getKey())))) {
             return false;
@@ -133,14 +134,32 @@ public class StringFilter {
      * @return retorna o mapa de strings em uma string separada pelo separador
      * informado.
      */
-    public String printMap(Map<String, String> map, String separator) {
+    public static String printMap(Map<String, String> map, String separator) {
+        return printMap(map, separator, false);
+    }
+
+    /**
+     * Converte o mapa de strings em uma string separada pelo separador
+     * informado.
+     *
+     * @param separator A String que irá separar as strings
+     * @param map O mapa a ser convertido para string
+     * @param printHeader Verdadeiro ou falso para imprimir antes do valor o
+     * nome da coluna mais "="
+     * @return retorna o mapa de strings em uma string separada pelo separador
+     * informado.
+     */
+    public static String printMap(Map<String, String> map, String separator, Boolean printHeader) {
         //Se tiver algo dentro da lista
         if (map.size() > 0) {
             //Instancia string builder
             StringBuilder sb = new StringBuilder();
             //percorre mapa
-            map.entrySet().forEach((entry) -> {
-                sb.append(entry.getKey()).append(separator);
+            map.forEach((key, value) -> {
+                if(printHeader){
+                    sb.append(key).append("=");
+                }
+                sb.append(value).append(separator);
             });
 
             //Retorna a lista em string e remove ultimo separador inserido
