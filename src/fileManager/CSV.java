@@ -13,7 +13,7 @@ public class CSV {
      * comece com #, a primeira linha sera usada como header, caso o contrário,
      * as colunas serão nomeadas com o número da coluna.
      * <p>
-     * Quebra colunas por ";" Quebra linhas por "\n\r"
+     * Quebra colunas por ";" Quebra linhas por "\r\n"
      *
      * @param file Arquivo csv
      * @return Lista de linhas do csv
@@ -27,7 +27,7 @@ public class CSV {
      * comece com #, a primeira linha sera usada como header, caso o contrário,
      * as colunas serão nomeadas com o número da coluna.
      * <p>
-     * Quebra colunas por ";" Quebra linhas por "\n\r"
+     * Quebra colunas por ";" Quebra linhas por "\r\n"
      *
      * @param colBreaker texto para quebrar as colunas, por padrao use ";"
      * @param file Arquivo csv
@@ -49,7 +49,7 @@ public class CSV {
      * comece com #, a primeira linha sera usada como header, caso o contrário,
      * as colunas serão nomeadas com o número da coluna.
      * <p>
-     * Quebra colunas por ";" Quebra linhas por "\n\r"
+     * Quebra colunas por ";" Quebra linhas por "\r\n"
      *
      * @param colBreaker texto para quebrar as colunas, por padrao use ";"
      * @param text Arquivo texto
