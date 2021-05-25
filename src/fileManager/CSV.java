@@ -81,7 +81,7 @@ public class CSV {
         for (String line : lines) {
             if (!line.startsWith("#")) {
                 //Pega colunas da linha
-                String[] cols = line.split(colBreaker);
+                String[] cols = line.split(colBreaker,-1);
 
                 //tryCatch para evitar parar tudo caso alguma linha tenha mais colunas que a primeira
                 try {
