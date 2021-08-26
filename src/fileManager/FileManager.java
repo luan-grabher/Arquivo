@@ -12,17 +12,18 @@ import javax.swing.JOptionPane;
 public class FileManager {
 
     /**
-     * Delete all files and subfolders
+     * Exclui todos arquivos e pastas
+     * @param folder Pasta que irá excluir
      */
-    public static void deleteDirectory(File file) {
+    public static void cleanFolder(File folder) {
         // store all the paths of files and folders present
         // inside directory
-        for (File subfile : file.listFiles()) {
+        for (File subfile : folder.listFiles()) {
 
             // if it is a subfolder,e.g Rohan and Ritik,
             // recursiley call function to empty subfolder
             if (subfile.isDirectory()) {
-                deleteDirectory(subfile);
+                cleanFolder(subfile);
             }
 
             // delete files and empty subfolders
