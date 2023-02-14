@@ -10,7 +10,6 @@ public class XML {
     public static XML statico = null;
 
     public Document doc;
-    private File file;
 
     /**
      * Le um arquivo XML e torna ele legivel pela classe org.w3c.dom.Document
@@ -21,8 +20,6 @@ public class XML {
      */
     public XML(File file) throws Exception {
         try {
-            this.file = file;
-
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(file);

@@ -1,6 +1,5 @@
 package fileManager;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -98,7 +97,6 @@ public class FileManager {
     public static boolean save(File file, String text) {
         try {
             Writer writer;
-            BufferedWriter out = null;
 
             file = file.getAbsoluteFile();
 
