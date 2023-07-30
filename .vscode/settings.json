@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "e:\\Documents\\Projetos\\Moresco\\Jar-Vendors\\commons-collections4-4.4.jar"
+        "e:\\Documents\\Projetos\\Moresco\\Jar-Vendors\\commons-collections4-4.4.jar",
+        "c:\\Users\\luan\\Documents\\Projetos\\Moresco\\Jar-Vendors\\commons-collections4-4.4.jar"
     ]
 }

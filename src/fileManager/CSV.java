@@ -89,7 +89,9 @@ public class CSV {
 
                     //Para cada header coloca no mapa
                     headers.forEach((i, name) -> {
-                        map.put(name, cols[i]);
+                        Boolean issetCol = cols.length > i;
+                        String value = issetCol ? cols[i] : "";
+                        map.put(name, value);
                     });
 
                     //coloca mapa na lista

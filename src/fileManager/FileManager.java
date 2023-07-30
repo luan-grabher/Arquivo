@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -66,7 +67,7 @@ public class FileManager {
      * @param file "C:\Arquivo.txt"
      * @return = Retorna o texto dentro do arquivo.
      */
-    public static String getText(File file) {
+    public static String getText(File file, String charset) {
         try {
             if (!file.exists()) {
                 throw new Exception("O arquivo '" + file.getAbsolutePath() + "' não existe!");
@@ -74,7 +75,7 @@ public class FileManager {
 
             String text;
             file = file.getAbsoluteFile();
-            Scanner scan = new Scanner(file, "latin1");
+            Scanner scan = new Scanner(file, charset);
             text = scan.useDelimiter("\\A").next();
             scan.close();
 
@@ -85,6 +86,10 @@ public class FileManager {
             //return "ERRO NA LEITURA: " + e;
             return "";
         }
+    }
+
+    public static String getText(File file) {
+        return getText(file, "latin1");
     }
 
     /**
